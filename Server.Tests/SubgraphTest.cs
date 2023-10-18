@@ -3,7 +3,7 @@ using HotChocolate;
 using HotChocolate.Execution;
 using Snapshooter.Xunit;
 
-namespace Example;
+namespace Server;
 
 public class EntitiesResolverTests
 {
@@ -25,7 +25,7 @@ public class EntitiesResolverTests
     }
 
     [Fact]
-    public async Task Foo_By_Id()
+    public async Task Thing_By_Id()
     {
         // arrange
         var executor = await CreateSchemaAsync();
@@ -33,7 +33,7 @@ public class EntitiesResolverTests
         // act
         var result = await executor.ExecuteAsync(
             @"query {
-                foo(id: ""1"") {
+                thing(id: ""1"") {
                     id
                     name
                 }

@@ -10,9 +10,11 @@ builder.Services
     .AddApolloFederationV2(new CustomSchema())
     .AddType<ContactDirectiveType>()
     .AddQueryType<Query>()
+    .AddMutationType<Mutation>()
     .RegisterService<Data>();
 
 var app = builder.Build();
 
-app.MapGraphQL("/graphql");
-app.RunWithGraphQLCommands(args);
+app.MapGraphQL();
+app.MapBananaCakePop("/");
+app.Run();
