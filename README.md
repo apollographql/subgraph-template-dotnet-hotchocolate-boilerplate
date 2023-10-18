@@ -2,39 +2,30 @@
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/Jomu73?referralCode=xsbY2R)
 
-This is an example application template that can be used to create Federated GraphQL subgraph using [HotChocolate](https://chillicream.com/docs/hotchocolate/v13). You can use this template from [Rover](https://www.apollographql.com/docs/rover/commands/template/) with `rover template use --template subgraph-dotnet-hotchocolate`.
+This is an example application template that can be used to create Federated GraphQL subgraph using [HotChocolate](https://chillicream.com/docs/hotchocolate/v13). You can use this template from [Rover](https://www.apollographql.com/docs/rover/commands/template/) with `rover template use --template subgraph-dotnet-hotchocolate-annotation`.
 
 This example application implements following GraphQL schema:
 
 ```graphql
-directive @contact(
-    "Contact title of the subgraph owner"
-    name: String!
-    "URL where the subgraph's owner can be reached"
-    url: String
-    "Other relevant notes can be included here; supports markdown links"
-    description: String
-) on SCHEMA
-
-schema
-@contact(
-    name: "FooBar Server Team"
-    url: "https://myteam.slack.com/archives/teams-chat-room-url"
-    description: "send urgent issues to [#oncall](https://yourteam.slack.com/archives/oncall)"
-)
-@link(
-    url: "https://specs.apollo.dev/federation/v2.5",
-    import: ["@key"]
-) {
-    query: Query
-}
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key"])
 
 type Query {
-    foo(id: ID!): Foo
+  thing(id: ID!): Thing
 }
-type Foo @key(fields: "id") {
-    id: ID!
-    name: String
+
+type Mutation {
+  createThing(thing: CreateThing!): Thing
+}
+
+type Thing @key(fields: "id") {
+  id: ID!
+  name: String
+}
+
+input CreateThing {
+  id: ID!
+  name: String
 }
 ```
 
@@ -62,21 +53,25 @@ To start the GraphQL server:
 
 ```shell script
 # from root directory
-dotnet run --project src/HotChocolateSubgraph/HotChocolateSubgraph.csproj
+dotnet run --project Server
 
-# from src/HotChocolateSubgraph directory
+# from Server directory
 dotnet run
 ```
 
-Once the app has started you can explore the example schema by opening the Banana Cake Pop IDE at http://localhost:5000/graphql and begin developing your supergraph with `rover dev --url http://localhost:5000/graphql --name my-sugraph`.
+Once the app has started you can explore the example schema by opening the Banana Cake Pop IDE at http://localhost:5000/ or http://localhost:5000/graphql and begin developing your supergraph with `rover dev --url http://localhost:5000/graphql --name my-sugraph`.
 
-## Apollo Studio Integration
+## Debug in VS Code
+
+There is a launch configuration for both the Server project and the Tests project that you can debug with VS Code. Open up the debug panel in VS Code and press the play button.
+
+## GraphOS Integration
 
 1. Set these secrets in GitHub Actions:
-    1. APOLLO_KEY: An Apollo Studio API key for the supergraph to enable schema checks and publishing of the
-       subgraph.
-    2. APOLLO_GRAPH_REF: The name of the supergraph in Apollo Studio.
-    3. PRODUCTION_URL: The URL of the deployed subgraph that the supergraph gateway will route to.
+   1. APOLLO_KEY: An Apollo Studio API key for the supergraph to enable schema checks and publishing of the
+      subgraph.
+   2. APOLLO_GRAPH_REF: The name of the supergraph in Apollo Studio.
+   3. PRODUCTION_URL: The URL of the deployed subgraph that the supergraph gateway will route to.
 2. Set `SUBGRAPH_NAME` in .github/workflows/checks.yaml and .github/workflows/deploy.yaml
 3. Remove the `if: false` lines from `.github/workflows/checks.yaml` and `.github/workflows/deploy.yaml` to enable schema checks and publishing.
 4. Write your custom deploy logic in `.github/workflows/deploy.yaml`.
@@ -84,6 +79,6 @@ Once the app has started you can explore the example schema by opening the Banan
 
 ## Additional Resources
 
-* [HotChocolate documentation](https://chillicream.com/docs/hotchocolate/v13)
-* [.NET SDL documentation](https://learn.microsoft.com/en-us/dotnet/core/sdk)
-* [.NET CLI documentation](https://learn.microsoft.com/en-us/dotnet/core/tools/)
+- [HotChocolate documentation](https://chillicream.com/docs/hotchocolate/v13)
+- [.NET SDL documentation](https://learn.microsoft.com/en-us/dotnet/core/sdk)
+- [.NET CLI documentation](https://learn.microsoft.com/en-us/dotnet/core/tools/)
