@@ -8,7 +8,7 @@ This example application implements following GraphQL schema:
 
 ```graphql
 extend schema
-  @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key"])
+  @link(url: "https://specs.apollo.dev/federation/v2.5", import: ["@key"])
 
 type Query {
   thing(id: ID!): Thing
