@@ -45,7 +45,7 @@ jobs:
           curl -sSL https://rover.apollo.dev/nix/latest | sh
           echo "$HOME/.rover/bin" >> $GITHUB_PATH
       - name: Generate Schema
-        run: dotnet run -- schema export --output schema.graphqls
+        run: dotnet run --project Server -- schema export --output ../schema.graphql
       - name: Schema Check
         run: rover subgraph check ${{ secrets.APOLLO_GRAPH_REF }} --schema schema.graphqls --name ${{ env.SUBGRAPH_NAME }}
         env:

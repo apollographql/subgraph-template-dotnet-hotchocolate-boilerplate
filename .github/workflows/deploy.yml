@@ -36,7 +36,7 @@ jobs:
   publish_schema:
     name: Publish new schema to Apollo Studio
     if: false
-    needs: [ deploy ]
+    needs: [deploy]
     env:
       APOLLO_VCS_COMMIT: ${{ github.event.pull_request.head.sha }}
       # rename this to a valid subgraph name
@@ -54,7 +54,7 @@ jobs:
           curl -sSL https://rover.apollo.dev/nix/latest | sh
           echo "$HOME/.rover/bin" >> $GITHUB_PATH
       - name: Generate Schema
-        run: dotnet run -- schema export --output schema.graphqls
+        run: dotnet run --project Server -- schema export --output ../schema.graphql
       - name: Publish Schema
         run: rover subgraph publish ${{ secrets.APOLLO_GRAPH_REF }} --schema src/main/resources/graphql/schema.graphqls --name ${{ env.SUBGRAPH_NAME }} --routing-url ${{ secrets.PRODUCTION_URL }}
         env:

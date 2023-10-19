@@ -1,6 +1,7 @@
 using ApolloGraphQL.HotChocolate.Federation.Two;
 using HotChocolate.AspNetCore;
 using HotChocolate.Execution;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +24,7 @@ var app = builder.Build();
 
 app.MapGraphQL();
 app.MapBananaCakePop("/");
-app.Run();
+app.RunWithGraphQLCommandsAsync(args);
 
 public sealed class RouterAuthInterceptor : DefaultHttpRequestInterceptor
 {
