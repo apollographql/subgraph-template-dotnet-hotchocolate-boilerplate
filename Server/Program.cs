@@ -1,7 +1,6 @@
 using ApolloGraphQL.HotChocolate.Federation.Two;
 using HotChocolate.AspNetCore;
 using HotChocolate.Execution;
-using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +23,11 @@ var app = builder.Build();
 
 app.MapGraphQL();
 app.MapBananaCakePop("/");
-app.RunWithGraphQLCommandsAsync(args);
+
+if (args.Length > 1 && args[0] == "schema" && args[1] == "export")
+    app.RunWithGraphQLCommandsAsync(args);
+else
+    app.Run();
 
 public sealed class RouterAuthInterceptor : DefaultHttpRequestInterceptor
 {
