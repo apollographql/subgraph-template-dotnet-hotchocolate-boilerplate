@@ -1,6 +1,6 @@
 # .NET HotChocolate Federated GraphQL Subgraph
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/asB7Lh?referralCode=neALOu)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/cJcDcc?referralCode=neALOu)
 
 This is an example application template that can be used to create Federated GraphQL subgraph using [HotChocolate](https://chillicream.com/docs/hotchocolate/v13). You can use this template from [Rover](https://www.apollographql.com/docs/rover/commands/template/) with `rover template use --template subgraph-dotnet-hotchocolate-annotation`.
 
