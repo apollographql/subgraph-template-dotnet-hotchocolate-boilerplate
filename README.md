@@ -2,7 +2,7 @@
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/cJcDcc?referralCode=neALOu)
 
-This is an example application template that can be used to create Federated GraphQL subgraph using [HotChocolate](https://chillicream.com/docs/hotchocolate/v13). You can use this template from [Rover](https://www.apollographql.com/docs/rover/commands/template/) with `rover template use --template subgraph-dotnet-hotchocolate-annotation`.
+This is an example application template that can be used to create Federated GraphQL subgraph using [HotChocolate](https://chillicream.com/docs/hotchocolate/v13). You can use this template from [Rover](https://www.apollographql.com/docs/rover/commands/template/) with `rover template use --template subgraph-csharp-hotchocolate-annotation`.
 
 This example application implements following GraphQL schema:
 
@@ -59,7 +59,7 @@ dotnet run --project Server
 dotnet run
 ```
 
-Once the app has started you can explore the example schema by opening the Banana Cake Pop IDE at http://localhost:5000/ or http://localhost:5000/graphql and begin developing your supergraph with `rover dev --url http://localhost:5000/graphql --name my-sugraph`.
+Once the app has started you can explore the example schema by opening the Banana Cake Pop IDE at http://localhost:4001/ or http://localhost:4001/graphql and begin developing your supergraph with `rover dev --url http://localhost:4001/graphql --name my-subgraph`.
 
 ## Debug in VS Code
 
