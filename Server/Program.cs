@@ -22,7 +22,8 @@ builder.WebHost.UseUrls($"http://*:{port}");
 var app = builder.Build();
 
 app.MapGraphQL();
-app.MapBananaCakePop("/");
+var bananaCakePop = app.MapBananaCakePop("/");
+bananaCakePop.WithOptions(new GraphQLToolOptions { GraphQLEndpoint = "/graphql" });
 
 if (args.Length > 1 && args[0] == "schema" && args[1] == "export")
     app.RunWithGraphQLCommandsAsync(args);
