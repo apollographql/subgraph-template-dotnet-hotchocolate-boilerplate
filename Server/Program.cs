@@ -26,7 +26,7 @@ var bananaCakePop = app.MapBananaCakePop("/");
 bananaCakePop.WithOptions(new GraphQLToolOptions { GraphQLEndpoint = "/graphql" });
 
 if (args.Length > 1 && args[0] == "schema" && args[1] == "export")
-    app.RunWithGraphQLCommandsAsync(args);
+    _ = app.RunWithGraphQLCommandsAsync(args);
 else
     app.Run();
 
