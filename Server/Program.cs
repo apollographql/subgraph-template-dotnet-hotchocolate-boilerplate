@@ -16,7 +16,7 @@ builder.Services
     .RegisterService<Data>()
     .AddHttpRequestInterceptor<RouterAuthInterceptor>();
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+var port = Environment.GetEnvironmentVariable("PORT") ?? "4001";
 builder.WebHost.UseUrls($"http://*:{port}");
 
 var app = builder.Build();
@@ -34,7 +34,7 @@ public sealed class RouterAuthInterceptor : DefaultHttpRequestInterceptor
     public override ValueTask OnCreateAsync(HttpContext context, IRequestExecutor requestExecutor, IQueryRequestBuilder requestBuilder, CancellationToken cancellationToken)
     {
         var incomingHeader = context.Request.Headers["router-authorization"];
-        var routerAuth = Environment.GetEnvironmentVariable("router-authorization");
+        var routerAuth = Environment.GetEnvironmentVariable("ROUTER_SECRET");
         if (routerAuth != null && incomingHeader != routerAuth)
         {
             throw new Exception("Missing router authentication");
