@@ -79,5 +79,5 @@ There is a launch configuration for both the Server project and the Tests projec
 ## Additional Resources
 
 - [HotChocolate documentation](https://chillicream.com/docs/hotchocolate/v13)
-- [.NET SDL documentation](https://learn.microsoft.com/en-us/dotnet/core/sdk)
+- [.NET SDK documentation](https://learn.microsoft.com/en-us/dotnet/core/sdk)
 - [.NET CLI documentation](https://learn.microsoft.com/en-us/dotnet/core/tools/)
