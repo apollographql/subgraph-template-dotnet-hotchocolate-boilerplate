@@ -8,6 +8,7 @@ public class EntitiesResolverTests
 {
     private static async Task<IRequestExecutor> CreateSchemaAsync()
         => await new ServiceCollection()
+            .AddSingleton<Data>()
             .AddGraphQL()
             .AddGraphQLServices()
             .BuildRequestExecutorAsync();
