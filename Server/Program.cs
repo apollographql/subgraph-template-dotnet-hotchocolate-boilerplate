@@ -1,34 +1,21 @@
-using ApolloGraphQL.HotChocolate.Federation.Two;
 using HotChocolate.AspNetCore;
 using HotChocolate.Execution;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateSlimBuilder(args);
 
 builder.Services
     .AddSingleton<Data>();
 
 builder.Services
     .AddGraphQLServer()
-    .AddApolloFederationV2(new CustomSchema())
-    .AddType<ContactDirectiveType>()
-    .AddQueryType<Query>()
-    .AddMutationType<Mutation>()
-    .RegisterService<Data>()
+    .AddGraphQLServices()
     .AddHttpRequestInterceptor<RouterAuthInterceptor>();
-
-var port = Environment.GetEnvironmentVariable("PORT") ?? "4001";
-builder.WebHost.UseUrls($"http://*:{port}");
 
 var app = builder.Build();
 
 app.MapGraphQL();
-var bananaCakePop = app.MapBananaCakePop("/");
-bananaCakePop.WithOptions(new GraphQLToolOptions { GraphQLEndpoint = "/graphql" });
 
-if (args.Length > 1 && args[0] == "schema" && args[1] == "export")
-    _ = app.RunWithGraphQLCommandsAsync(args);
-else
-    app.Run();
+app.RunWithGraphQLCommands(args);
 
 public sealed class RouterAuthInterceptor : DefaultHttpRequestInterceptor
 {

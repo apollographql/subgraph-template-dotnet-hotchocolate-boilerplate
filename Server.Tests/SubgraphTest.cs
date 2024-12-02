@@ -1,4 +1,3 @@
-using ApolloGraphQL.HotChocolate.Federation.Two;
 using HotChocolate;
 using HotChocolate.Execution;
 using Snapshooter.Xunit;
@@ -11,10 +10,7 @@ public class EntitiesResolverTests
         => await new ServiceCollection()
             .AddSingleton<Data>()
             .AddGraphQL()
-            .AddApolloFederationV2(new CustomSchema())
-            .AddType<ContactDirectiveType>()
-            .AddQueryType<Query>()
-            .RegisterService<Data>()
+            .AddGraphQLServices()
             .BuildRequestExecutorAsync();
 
     [Fact]
